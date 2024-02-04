@@ -1,0 +1,5058 @@
+openapi: 3.0.1
+info:
+  title: Dodo Global API
+  version: v2
+servers:
+- url: /
+paths:
+  /api/v2/brands:
+    get:
+      tags:
+      - Brands
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BrandModel'
+                x-content-type: text/plain
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BrandModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BrandModel'
+  /api/v2/countries:
+    get:
+      tags:
+      - Countries
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CountryModelBrandData'
+                x-content-type: text/plain
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CountryModelBrandData'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CountryModelBrandData'
+  /api/v2/{brand}/countries:
+    get:
+      tags:
+      - Countries
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CountryModel'
+                x-content-type: text/plain
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CountryModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CountryModel'
+  /api/v2/{brand}/orders/count-by-source/{year}/{month}/{day}:
+    get:
+      tags:
+      - Orders
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: year
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: month
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: day
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OrderModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OrderModelBrandData'
+  /api/v2/orders/count-by-source/{year}/{month}/{day}:
+    get:
+      tags:
+      - Orders
+      parameters:
+      - name: year
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: month
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: day
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OrderModelBrandListData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderModelBrandListData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OrderModelBrandListData'
+  /api/v2/{brand}/products/top:
+    get:
+      tags:
+      - Products
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: start
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: end
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProductStatisticsModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductStatisticsModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProductStatisticsModelBrandData'
+  /api/v2/{brand}/{countryId}/{unitId}/products/top:
+    get:
+      tags:
+      - Products
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: countryId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: unitId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: start
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: end
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProductStatisticsModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductStatisticsModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProductStatisticsModelBrandData'
+  /api/v2/{brand}/ratings:
+    get:
+      tags:
+      - Ratings
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RatingsModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingsModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RatingsModelBrandData'
+  /api/v2/ratings:
+    get:
+      tags:
+      - Ratings
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RatingsModelBrandListData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingsModelBrandListData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RatingsModelBrandListData'
+  /api/v2/{brand}/revenue/months/{year}/{month}:
+    get:
+      tags:
+      - Revenue
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: year
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: month
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TotalRevenueHistoryModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TotalRevenueHistoryModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TotalRevenueHistoryModelBrandData'
+  /api/v2/revenue/months/{year}/{month}:
+    get:
+      tags:
+      - Revenue
+      parameters:
+      - name: year
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: month
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TotalRevenueHistoryModelBrandListData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TotalRevenueHistoryModelBrandListData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TotalRevenueHistoryModelBrandListData'
+  /api/v2/{brand}/revenue/months/last:
+    get:
+      tags:
+      - Revenue
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MonthTotalRevenueModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthTotalRevenueModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MonthTotalRevenueModelBrandData'
+  /api/v2/revenue/months/last:
+    get:
+      tags:
+      - Revenue
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MonthTotalRevenueModelBrandListData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthTotalRevenueModelBrandListData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MonthTotalRevenueModelBrandListData'
+  /api/v2/{brand}/{countryId}/revenue/daily:
+    get:
+      tags:
+      - Revenue
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: countryId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: from
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      - name: to
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CountryDailyRevenueModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountryDailyRevenueModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CountryDailyRevenueModelBrandData'
+  /api/v2/{brand}/revenue/daily/{year}/{month}/{day}:
+    get:
+      tags:
+      - Revenue
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: year
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: month
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: day
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BrandDailyRevenueListModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandDailyRevenueListModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BrandDailyRevenueListModel'
+  /api/v2/revenue/daily/{year}/{month}/{day}:
+    get:
+      tags:
+      - Revenue
+      parameters:
+      - name: year
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: month
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: day
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BrandListDailyRevenueListModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandListDailyRevenueListModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BrandListDailyRevenueListModel'
+  /api/v2/{brand}/revenue/weekly/top:
+    get:
+      tags:
+      - Revenue
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/WeeklyTopModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeeklyTopModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WeeklyTopModelBrandData'
+  /api/v2/revenue/weekly/top:
+    get:
+      tags:
+      - Revenue
+      parameters:
+      - name: count
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/WeeklyTopModelBrandListData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeeklyTopModelBrandListData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WeeklyTopModelBrandListData'
+  /api/v2/{brand}/revenue/unit/{countryId}/{unitId}/week/history/{startYear}/{endYear}:
+    get:
+      tags:
+      - UnitRevenue
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: countryId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: unitId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: startYear
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: endYear
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/WeekRevenueHistoryModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeekRevenueHistoryModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WeekRevenueHistoryModelBrandData'
+  /api/v2/{brand}/revenue/unit/{countryId}/{unitId}/history:
+    get:
+      tags:
+      - UnitRevenue
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: countryId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: unitId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RevenueHistoryModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevenueHistoryModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RevenueHistoryModelBrandData'
+  /api/v2/{brand}/revenue/unit/{countryId}/{unitId}/history/{startYear}/{endYear}:
+    get:
+      tags:
+      - UnitRevenue
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: countryId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: unitId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: startYear
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: endYear
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RevenueHistoryModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevenueHistoryModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RevenueHistoryModelBrandData'
+  /api/v2/{brand}/revenue/unit/{countryId}/{unitId}/months/last:
+    get:
+      tags:
+      - UnitRevenue
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: countryId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: unitId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MonthRevenueHistoryModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthRevenueHistoryModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MonthRevenueHistoryModelBrandData'
+  /api/v2/{brand}/revenue/unit/{countryId}/{unitId}/monthly/{year}/{month}:
+    get:
+      tags:
+      - UnitRevenue
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: countryId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: unitId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: year
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: month
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PeriodicRevenueListModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeriodicRevenueListModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PeriodicRevenueListModel'
+  /api/v2/{brand}/revenue/unit/{countryId}/{unitId}/daily/{year}/{month}/{day}:
+    get:
+      tags:
+      - UnitRevenue
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: countryId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: unitId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: year
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: month
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: day
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DailyRevenueListModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DailyRevenueListModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DailyRevenueListModel'
+  /api/v2/{brand}/revenue/unit/{countryId}/{unitId}/today:
+    get:
+      tags:
+      - UnitRevenue
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: countryId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: unitId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StatisticsModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatisticsModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/StatisticsModelBrandData'
+  /api/v2/{brand}/revenue/unit/{countryId}/{unitId}/yesterday:
+    get:
+      tags:
+      - UnitRevenue
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: countryId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: unitId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StatisticsModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatisticsModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/StatisticsModelBrandData'
+  /api/v2/{brand}/units/all/{countryId}:
+    get:
+      tags:
+      - Units
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: countryId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UnitListModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnitListModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UnitListModelBrandData'
+  /api/v2/units/all/{countryId}:
+    get:
+      tags:
+      - Units
+      parameters:
+      - name: countryId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UnitListModelBrandListData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnitListModelBrandListData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UnitListModelBrandListData'
+  /api/v2/{brand}/units/{countryId}/{unitId}:
+    get:
+      tags:
+      - Units
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: countryId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: unitId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UnitSingleModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnitSingleModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UnitSingleModelBrandData'
+  /api/v2/{brand}/units/count:
+    get:
+      tags:
+      - Units
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TotalUnitCountListModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TotalUnitCountListModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TotalUnitCountListModel'
+  /api/v2/units/count:
+    get:
+      tags:
+      - Units
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BrandListTotalUnitCountListModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandListTotalUnitCountListModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BrandListTotalUnitCountListModel'
+  /api/v2/{brand}/units/count/months/{year}/{month}:
+    get:
+      tags:
+      - Units
+      parameters:
+      - name: brand
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: year
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: month
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MonthUnitCountHistoryModelBrandData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthUnitCountHistoryModelBrandData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MonthUnitCountHistoryModelBrandData'
+  /api/v2/units/count/months/{year}/{month}:
+    get:
+      tags:
+      - Units
+      parameters:
+      - name: year
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: month
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MonthUnitCountHistoryModelBrandListData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthUnitCountHistoryModelBrandListData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MonthUnitCountHistoryModelBrandListData'
+components:
+  schemas:
+    AddressModel:
+      type: object
+      properties:
+        text:
+          type: string
+          nullable: true
+        locality:
+          $ref: '#/components/schemas/LocalityModel'
+        street:
+          $ref: '#/components/schemas/StreetModel'
+        house:
+          $ref: '#/components/schemas/HouseModel'
+      additionalProperties: false
+      example:
+        street:
+          name: name
+          typeName: typeName
+          id: 7
+          type: type
+          typeAbbr: typeAbbr
+        locality:
+          name: name
+          id: 2
+        text: text
+        house:
+          number: number
+    BrandDailyRevenueListModel:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/MetricsHistoryModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        day:
+          type: string
+          nullable: true
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - countryCode: countryCode
+          metrics:
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          countryId: 0
+        - countryCode: countryCode
+          metrics:
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          countryId: 0
+        day: day
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    BrandListDailyRevenueListModel:
+      type: object
+      properties:
+        brands:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/BrandDailyRevenueListModel'
+      additionalProperties: false
+      example:
+        brands:
+        - countries:
+          - countryCode: countryCode
+            metrics:
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            countryId: 0
+          - countryCode: countryCode
+            metrics:
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            countryId: 0
+          day: day
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+        - countries:
+          - countryCode: countryCode
+            metrics:
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            countryId: 0
+          - countryCode: countryCode
+            metrics:
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            countryId: 0
+          day: day
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+    BrandListTotalUnitCountListModel:
+      type: object
+      properties:
+        brands:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/BrandTotalUnitCountListModel'
+      additionalProperties: false
+      example:
+        brands:
+        - total: 0
+          countries:
+          - countryCode: countryCode
+            pizzeriaCount: 6
+            countryName: countryName
+            countryId: 0
+          - countryCode: countryCode
+            pizzeriaCount: 6
+            countryName: countryName
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+        - total: 0
+          countries:
+          - countryCode: countryCode
+            pizzeriaCount: 6
+            countryName: countryName
+            countryId: 0
+          - countryCode: countryCode
+            pizzeriaCount: 6
+            countryName: countryName
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+    BrandModel:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        name: name
+    BrandTotalUnitCountListModel:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/UnitCountModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        total:
+          type: integer
+          format: int32
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        total: 0
+        countries:
+        - countryCode: countryCode
+          pizzeriaCount: 6
+          countryName: countryName
+          countryId: 0
+        - countryCode: countryCode
+          pizzeriaCount: 6
+          countryName: countryName
+          countryId: 0
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    CoordinatesModel:
+      type: object
+      properties:
+        lat:
+          type: number
+          format: double
+          nullable: true
+        long:
+          type: number
+          format: double
+          nullable: true
+      additionalProperties: false
+      example:
+        lat: 5.962133916683182
+        long: 5.637376656633329
+    CountryDailyRevenueModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        days:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/DailyMetricsModel'
+      additionalProperties: false
+      example:
+        countryCode: countryCode
+        days:
+        - metrics:
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          day: day
+        - metrics:
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          day: day
+        countryId: 0
+    CountryDailyRevenueModelBrandData:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/CountryDailyRevenueModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - countryCode: countryCode
+          days:
+          - metrics:
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            day: day
+          - metrics:
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            day: day
+          countryId: 0
+        - countryCode: countryCode
+          days:
+          - metrics:
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            day: day
+          - metrics:
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            - stationaryCount: 2
+              deliveryRevenue: 7.061401241503109
+              pickupRevenue: 3.616076749251911
+              deliveryMobileCount: 1
+              count: 5
+              pickupMobileCount: 6
+              deliveryMobileRevenue: 1.2315135367772556
+              pickupCount: 2
+              pickupMobileRevenue: 1.4894159098541704
+              revenue: 1.4658129805029452
+              stationaryMobileCount: 7
+              stationaryMobileRevenue: 4.145608029883936
+              unitId: 6
+              stationaryRevenue: 5.637376656633329
+              deliveryCount: 9
+            day: day
+          countryId: 0
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    CountryModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        currency:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        code: code
+        name: name
+        currency: currency
+        id: 0
+    CountryModelBrandData:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/CountryModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - code: code
+          name: name
+          currency: currency
+          id: 0
+        - code: code
+          name: name
+          currency: currency
+          id: 0
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    DailyMetricsModel:
+      type: object
+      properties:
+        day:
+          type: string
+          nullable: true
+        metrics:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/MetricsModel'
+      additionalProperties: false
+      example:
+        metrics:
+        - stationaryCount: 2
+          deliveryRevenue: 7.061401241503109
+          pickupRevenue: 3.616076749251911
+          deliveryMobileCount: 1
+          count: 5
+          pickupMobileCount: 6
+          deliveryMobileRevenue: 1.2315135367772556
+          pickupCount: 2
+          pickupMobileRevenue: 1.4894159098541704
+          revenue: 1.4658129805029452
+          stationaryMobileCount: 7
+          stationaryMobileRevenue: 4.145608029883936
+          unitId: 6
+          stationaryRevenue: 5.637376656633329
+          deliveryCount: 9
+        - stationaryCount: 2
+          deliveryRevenue: 7.061401241503109
+          pickupRevenue: 3.616076749251911
+          deliveryMobileCount: 1
+          count: 5
+          pickupMobileCount: 6
+          deliveryMobileRevenue: 1.2315135367772556
+          pickupCount: 2
+          pickupMobileRevenue: 1.4894159098541704
+          revenue: 1.4658129805029452
+          stationaryMobileCount: 7
+          stationaryMobileRevenue: 4.145608029883936
+          unitId: 6
+          stationaryRevenue: 5.637376656633329
+          deliveryCount: 9
+        day: day
+    DailyRevenueListModel:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/MetricsHistoryModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        day:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - countryCode: countryCode
+          metrics:
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          countryId: 0
+        - countryCode: countryCode
+          metrics:
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          countryId: 0
+        day: day
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    ErrorModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countryCode: countryCode
+        countryId: 6
+    HouseModel:
+      type: object
+      properties:
+        number:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        number: number
+    LocalityModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        name: name
+        id: 2
+    MetricsHistoryModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        metrics:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/MetricsModel'
+      additionalProperties: false
+      example:
+        countryCode: countryCode
+        metrics:
+        - stationaryCount: 2
+          deliveryRevenue: 7.061401241503109
+          pickupRevenue: 3.616076749251911
+          deliveryMobileCount: 1
+          count: 5
+          pickupMobileCount: 6
+          deliveryMobileRevenue: 1.2315135367772556
+          pickupCount: 2
+          pickupMobileRevenue: 1.4894159098541704
+          revenue: 1.4658129805029452
+          stationaryMobileCount: 7
+          stationaryMobileRevenue: 4.145608029883936
+          unitId: 6
+          stationaryRevenue: 5.637376656633329
+          deliveryCount: 9
+        - stationaryCount: 2
+          deliveryRevenue: 7.061401241503109
+          pickupRevenue: 3.616076749251911
+          deliveryMobileCount: 1
+          count: 5
+          pickupMobileCount: 6
+          deliveryMobileRevenue: 1.2315135367772556
+          pickupCount: 2
+          pickupMobileRevenue: 1.4894159098541704
+          revenue: 1.4658129805029452
+          stationaryMobileCount: 7
+          stationaryMobileRevenue: 4.145608029883936
+          unitId: 6
+          stationaryRevenue: 5.637376656633329
+          deliveryCount: 9
+        countryId: 0
+    MetricsModel:
+      type: object
+      properties:
+        unitId:
+          type: integer
+          format: int32
+        revenue:
+          type: number
+          format: double
+        count:
+          type: integer
+          format: int32
+        stationaryRevenue:
+          type: number
+          format: double
+        stationaryCount:
+          type: integer
+          format: int32
+        deliveryRevenue:
+          type: number
+          format: double
+        deliveryCount:
+          type: integer
+          format: int32
+        pickupRevenue:
+          type: number
+          format: double
+        pickupCount:
+          type: integer
+          format: int32
+        stationaryMobileRevenue:
+          type: number
+          format: double
+        stationaryMobileCount:
+          type: integer
+          format: int32
+        deliveryMobileRevenue:
+          type: number
+          format: double
+        deliveryMobileCount:
+          type: integer
+          format: int32
+        pickupMobileRevenue:
+          type: number
+          format: double
+        pickupMobileCount:
+          type: integer
+          format: int32
+      additionalProperties: false
+      example:
+        stationaryCount: 2
+        deliveryRevenue: 7.061401241503109
+        pickupRevenue: 3.616076749251911
+        deliveryMobileCount: 1
+        count: 5
+        pickupMobileCount: 6
+        deliveryMobileRevenue: 1.2315135367772556
+        pickupCount: 2
+        pickupMobileRevenue: 1.4894159098541704
+        revenue: 1.4658129805029452
+        stationaryMobileCount: 7
+        stationaryMobileRevenue: 4.145608029883936
+        unitId: 6
+        stationaryRevenue: 5.637376656633329
+        deliveryCount: 9
+    MonthRevenueHistoryModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        unitId:
+          type: integer
+          format: int32
+        monthes:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/MonthRevenueModel'
+      additionalProperties: false
+      example:
+        countryCode: countryCode
+        unitId: 6
+        monthes:
+        - revenue: 5.637376656633329
+          month: 5
+          year: 1
+        - revenue: 5.637376656633329
+          month: 5
+          year: 1
+        countryId: 0
+    MonthRevenueHistoryModelBrandData:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/MonthRevenueHistoryModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - countryCode: countryCode
+          unitId: 6
+          monthes:
+          - revenue: 5.637376656633329
+            month: 5
+            year: 1
+          - revenue: 5.637376656633329
+            month: 5
+            year: 1
+          countryId: 0
+        - countryCode: countryCode
+          unitId: 6
+          monthes:
+          - revenue: 5.637376656633329
+            month: 5
+            year: 1
+          - revenue: 5.637376656633329
+            month: 5
+            year: 1
+          countryId: 0
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    MonthRevenueModel:
+      type: object
+      properties:
+        year:
+          type: integer
+          format: int32
+        month:
+          type: integer
+          format: int32
+        revenue:
+          type: number
+          format: double
+      additionalProperties: false
+      example:
+        revenue: 5.637376656633329
+        month: 5
+        year: 1
+    MonthTotalRevenueModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        currency:
+          type: string
+          nullable: true
+        revenue:
+          type: number
+          format: double
+      additionalProperties: false
+      example:
+        revenue: 6.027456183070403
+        countryCode: countryCode
+        currency: currency
+        countryId: 0
+    MonthTotalRevenueModelBrandData:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/MonthTotalRevenueModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - revenue: 6.027456183070403
+          countryCode: countryCode
+          currency: currency
+          countryId: 0
+        - revenue: 6.027456183070403
+          countryCode: countryCode
+          currency: currency
+          countryId: 0
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    MonthTotalRevenueModelBrandListData:
+      type: object
+      properties:
+        brands:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/MonthTotalRevenueModelBrandData'
+      additionalProperties: false
+      example:
+        brands:
+        - countries:
+          - revenue: 6.027456183070403
+            countryCode: countryCode
+            currency: currency
+            countryId: 0
+          - revenue: 6.027456183070403
+            countryCode: countryCode
+            currency: currency
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+        - countries:
+          - revenue: 6.027456183070403
+            countryCode: countryCode
+            currency: currency
+            countryId: 0
+          - revenue: 6.027456183070403
+            countryCode: countryCode
+            currency: currency
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+    MonthUnitCountHistoryModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        monthes:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/MonthUnitCountModel'
+      additionalProperties: false
+      example:
+        countryCode: countryCode
+        monthes:
+        - month: 1
+          year: 6
+          pizzeriaCount: 5
+        - month: 1
+          year: 6
+          pizzeriaCount: 5
+        countryId: 0
+    MonthUnitCountHistoryModelBrandData:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/MonthUnitCountHistoryModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - countryCode: countryCode
+          monthes:
+          - month: 1
+            year: 6
+            pizzeriaCount: 5
+          - month: 1
+            year: 6
+            pizzeriaCount: 5
+          countryId: 0
+        - countryCode: countryCode
+          monthes:
+          - month: 1
+            year: 6
+            pizzeriaCount: 5
+          - month: 1
+            year: 6
+            pizzeriaCount: 5
+          countryId: 0
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    MonthUnitCountHistoryModelBrandListData:
+      type: object
+      properties:
+        brands:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/MonthUnitCountHistoryModelBrandData'
+      additionalProperties: false
+      example:
+        brands:
+        - countries:
+          - countryCode: countryCode
+            monthes:
+            - month: 1
+              year: 6
+              pizzeriaCount: 5
+            - month: 1
+              year: 6
+              pizzeriaCount: 5
+            countryId: 0
+          - countryCode: countryCode
+            monthes:
+            - month: 1
+              year: 6
+              pizzeriaCount: 5
+            - month: 1
+              year: 6
+              pizzeriaCount: 5
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+        - countries:
+          - countryCode: countryCode
+            monthes:
+            - month: 1
+              year: 6
+              pizzeriaCount: 5
+            - month: 1
+              year: 6
+              pizzeriaCount: 5
+            countryId: 0
+          - countryCode: countryCode
+            monthes:
+            - month: 1
+              year: 6
+              pizzeriaCount: 5
+            - month: 1
+              year: 6
+              pizzeriaCount: 5
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+    MonthUnitCountModel:
+      type: object
+      properties:
+        year:
+          type: integer
+          format: int32
+        month:
+          type: integer
+          format: int32
+        pizzeriaCount:
+          type: integer
+          format: int32
+      additionalProperties: false
+      example:
+        month: 1
+        year: 6
+        pizzeriaCount: 5
+    OrderModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        countryName:
+          type: string
+          nullable: true
+        value:
+          $ref: '#/components/schemas/OrdersCountBySourceStatistics'
+      additionalProperties: false
+      example:
+        countryCode: countryCode
+        countryName: countryName
+        value:
+          ordersCountByRestaurant: 5
+          ordersCountByAggregator: 9
+          ordersCountByPhone: 6
+          ordersCountByPizzeria: 7
+          ordersCountByDefectOrder: 5
+          totalCount: 3
+          ordersCountBySite: 1
+          ordersCountByMobile: 2
+        countryId: 0
+    OrderModelBrandData:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/OrderModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - countryCode: countryCode
+          countryName: countryName
+          value:
+            ordersCountByRestaurant: 5
+            ordersCountByAggregator: 9
+            ordersCountByPhone: 6
+            ordersCountByPizzeria: 7
+            ordersCountByDefectOrder: 5
+            totalCount: 3
+            ordersCountBySite: 1
+            ordersCountByMobile: 2
+          countryId: 0
+        - countryCode: countryCode
+          countryName: countryName
+          value:
+            ordersCountByRestaurant: 5
+            ordersCountByAggregator: 9
+            ordersCountByPhone: 6
+            ordersCountByPizzeria: 7
+            ordersCountByDefectOrder: 5
+            totalCount: 3
+            ordersCountBySite: 1
+            ordersCountByMobile: 2
+          countryId: 0
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    OrderModelBrandListData:
+      type: object
+      properties:
+        brands:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/OrderModelBrandData'
+      additionalProperties: false
+      example:
+        brands:
+        - countries:
+          - countryCode: countryCode
+            countryName: countryName
+            value:
+              ordersCountByRestaurant: 5
+              ordersCountByAggregator: 9
+              ordersCountByPhone: 6
+              ordersCountByPizzeria: 7
+              ordersCountByDefectOrder: 5
+              totalCount: 3
+              ordersCountBySite: 1
+              ordersCountByMobile: 2
+            countryId: 0
+          - countryCode: countryCode
+            countryName: countryName
+            value:
+              ordersCountByRestaurant: 5
+              ordersCountByAggregator: 9
+              ordersCountByPhone: 6
+              ordersCountByPizzeria: 7
+              ordersCountByDefectOrder: 5
+              totalCount: 3
+              ordersCountBySite: 1
+              ordersCountByMobile: 2
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+        - countries:
+          - countryCode: countryCode
+            countryName: countryName
+            value:
+              ordersCountByRestaurant: 5
+              ordersCountByAggregator: 9
+              ordersCountByPhone: 6
+              ordersCountByPizzeria: 7
+              ordersCountByDefectOrder: 5
+              totalCount: 3
+              ordersCountBySite: 1
+              ordersCountByMobile: 2
+            countryId: 0
+          - countryCode: countryCode
+            countryName: countryName
+            value:
+              ordersCountByRestaurant: 5
+              ordersCountByAggregator: 9
+              ordersCountByPhone: 6
+              ordersCountByPizzeria: 7
+              ordersCountByDefectOrder: 5
+              totalCount: 3
+              ordersCountBySite: 1
+              ordersCountByMobile: 2
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+    OrdersCountBySourceStatistics:
+      type: object
+      properties:
+        ordersCountByPhone:
+          type: integer
+          format: int32
+        ordersCountBySite:
+          type: integer
+          format: int32
+        ordersCountByRestaurant:
+          type: integer
+          format: int32
+        ordersCountByDefectOrder:
+          type: integer
+          format: int32
+        ordersCountByMobile:
+          type: integer
+          format: int32
+        ordersCountByPizzeria:
+          type: integer
+          format: int32
+        ordersCountByAggregator:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int32
+          readOnly: true
+      additionalProperties: false
+      example:
+        ordersCountByRestaurant: 5
+        ordersCountByAggregator: 9
+        ordersCountByPhone: 6
+        ordersCountByPizzeria: 7
+        ordersCountByDefectOrder: 5
+        totalCount: 3
+        ordersCountBySite: 1
+        ordersCountByMobile: 2
+    Period:
+      type: object
+      properties:
+        month:
+          type: integer
+          format: int32
+        year:
+          type: integer
+          format: int32
+      additionalProperties: false
+      example:
+        month: 0
+        year: 6
+    PeriodicRevenueListModel:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/MetricsHistoryModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        period:
+          $ref: '#/components/schemas/Period'
+      additionalProperties: false
+      example:
+        period:
+          month: 0
+          year: 6
+        countries:
+        - countryCode: countryCode
+          metrics:
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          countryId: 0
+        - countryCode: countryCode
+          metrics:
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          - stationaryCount: 2
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 3.616076749251911
+            deliveryMobileCount: 1
+            count: 5
+            pickupMobileCount: 6
+            deliveryMobileRevenue: 1.2315135367772556
+            pickupCount: 2
+            pickupMobileRevenue: 1.4894159098541704
+            revenue: 1.4658129805029452
+            stationaryMobileCount: 7
+            stationaryMobileRevenue: 4.145608029883936
+            unitId: 6
+            stationaryRevenue: 5.637376656633329
+            deliveryCount: 9
+          countryId: 0
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    ProductImage:
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int32
+        urls:
+          type: array
+          nullable: true
+          items:
+            type: string
+      additionalProperties: false
+      example:
+        urls:
+        - urls
+        - urls
+        size: 1
+    ProductStatistic:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        ordersCount:
+          type: integer
+          format: int32
+        images:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ProductImage'
+      additionalProperties: false
+      example:
+        ordersCount: 6
+        images:
+        - urls:
+          - urls
+          - urls
+          size: 1
+        - urls:
+          - urls
+          - urls
+          size: 1
+        name: name
+    ProductStatisticsModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        countryName:
+          type: string
+          nullable: true
+        products:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ProductStatistic'
+      additionalProperties: false
+      example:
+        countryCode: countryCode
+        countryName: countryName
+        countryId: 0
+        products:
+        - ordersCount: 6
+          images:
+          - urls:
+            - urls
+            - urls
+            size: 1
+          - urls:
+            - urls
+            - urls
+            size: 1
+          name: name
+        - ordersCount: 6
+          images:
+          - urls:
+            - urls
+            - urls
+            size: 1
+          - urls:
+            - urls
+            - urls
+            size: 1
+          name: name
+    ProductStatisticsModelBrandData:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ProductStatisticsModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - countryCode: countryCode
+          countryName: countryName
+          countryId: 0
+          products:
+          - ordersCount: 6
+            images:
+            - urls:
+              - urls
+              - urls
+              size: 1
+            - urls:
+              - urls
+              - urls
+              size: 1
+            name: name
+          - ordersCount: 6
+            images:
+            - urls:
+              - urls
+              - urls
+              size: 1
+            - urls:
+              - urls
+              - urls
+              size: 1
+            name: name
+        - countryCode: countryCode
+          countryName: countryName
+          countryId: 0
+          products:
+          - ordersCount: 6
+            images:
+            - urls:
+              - urls
+              - urls
+              size: 1
+            - urls:
+              - urls
+              - urls
+              size: 1
+            name: name
+          - ordersCount: 6
+            images:
+            - urls:
+              - urls
+              - urls
+              size: 1
+            - urls:
+              - urls
+              - urls
+              size: 1
+            name: name
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    Rating:
+      type: object
+      properties:
+        unitUUId:
+          type: string
+          nullable: true
+        avgServiceTime:
+          type: integer
+          format: int32
+        summaryRates:
+          type: integer
+          format: int32
+        feedbackQty:
+          type: integer
+          format: int32
+        avgRating:
+          type: number
+          format: double
+        avgCookingTime:
+          type: integer
+          format: int32
+      additionalProperties: false
+      example:
+        avgServiceTime: 6
+        unitUUId: unitUUId
+        summaryRates: 1
+        feedbackQty: 5
+        avgRating: 5.637376656633329
+        avgCookingTime: 2
+    RatingsModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        countryName:
+          type: string
+          nullable: true
+        ratings:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/Rating'
+      additionalProperties: false
+      example:
+        countryCode: countryCode
+        ratings:
+        - avgServiceTime: 6
+          unitUUId: unitUUId
+          summaryRates: 1
+          feedbackQty: 5
+          avgRating: 5.637376656633329
+          avgCookingTime: 2
+        - avgServiceTime: 6
+          unitUUId: unitUUId
+          summaryRates: 1
+          feedbackQty: 5
+          avgRating: 5.637376656633329
+          avgCookingTime: 2
+        countryName: countryName
+        countryId: 0
+    RatingsModelBrandData:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RatingsModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - countryCode: countryCode
+          ratings:
+          - avgServiceTime: 6
+            unitUUId: unitUUId
+            summaryRates: 1
+            feedbackQty: 5
+            avgRating: 5.637376656633329
+            avgCookingTime: 2
+          - avgServiceTime: 6
+            unitUUId: unitUUId
+            summaryRates: 1
+            feedbackQty: 5
+            avgRating: 5.637376656633329
+            avgCookingTime: 2
+          countryName: countryName
+          countryId: 0
+        - countryCode: countryCode
+          ratings:
+          - avgServiceTime: 6
+            unitUUId: unitUUId
+            summaryRates: 1
+            feedbackQty: 5
+            avgRating: 5.637376656633329
+            avgCookingTime: 2
+          - avgServiceTime: 6
+            unitUUId: unitUUId
+            summaryRates: 1
+            feedbackQty: 5
+            avgRating: 5.637376656633329
+            avgCookingTime: 2
+          countryName: countryName
+          countryId: 0
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    RatingsModelBrandListData:
+      type: object
+      properties:
+        brands:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RatingsModelBrandData'
+      additionalProperties: false
+      example:
+        brands:
+        - countries:
+          - countryCode: countryCode
+            ratings:
+            - avgServiceTime: 6
+              unitUUId: unitUUId
+              summaryRates: 1
+              feedbackQty: 5
+              avgRating: 5.637376656633329
+              avgCookingTime: 2
+            - avgServiceTime: 6
+              unitUUId: unitUUId
+              summaryRates: 1
+              feedbackQty: 5
+              avgRating: 5.637376656633329
+              avgCookingTime: 2
+            countryName: countryName
+            countryId: 0
+          - countryCode: countryCode
+            ratings:
+            - avgServiceTime: 6
+              unitUUId: unitUUId
+              summaryRates: 1
+              feedbackQty: 5
+              avgRating: 5.637376656633329
+              avgCookingTime: 2
+            - avgServiceTime: 6
+              unitUUId: unitUUId
+              summaryRates: 1
+              feedbackQty: 5
+              avgRating: 5.637376656633329
+              avgCookingTime: 2
+            countryName: countryName
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+        - countries:
+          - countryCode: countryCode
+            ratings:
+            - avgServiceTime: 6
+              unitUUId: unitUUId
+              summaryRates: 1
+              feedbackQty: 5
+              avgRating: 5.637376656633329
+              avgCookingTime: 2
+            - avgServiceTime: 6
+              unitUUId: unitUUId
+              summaryRates: 1
+              feedbackQty: 5
+              avgRating: 5.637376656633329
+              avgCookingTime: 2
+            countryName: countryName
+            countryId: 0
+          - countryCode: countryCode
+            ratings:
+            - avgServiceTime: 6
+              unitUUId: unitUUId
+              summaryRates: 1
+              feedbackQty: 5
+              avgRating: 5.637376656633329
+              avgCookingTime: 2
+            - avgServiceTime: 6
+              unitUUId: unitUUId
+              summaryRates: 1
+              feedbackQty: 5
+              avgRating: 5.637376656633329
+              avgCookingTime: 2
+            countryName: countryName
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+    RevenueHistoryModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        unitId:
+          type: integer
+          format: int32
+        monthes:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RevenueModel'
+      additionalProperties: false
+      example:
+        countryCode: countryCode
+        unitId: 6
+        monthes:
+        - revenue: 5.637376656633329
+          month: 5
+          deliveryRevenue: 7.061401241503109
+          pickupRevenue: 9.301444243932576
+          year: 1
+          stationaryRevenue: 2.3021358869347655
+        - revenue: 5.637376656633329
+          month: 5
+          deliveryRevenue: 7.061401241503109
+          pickupRevenue: 9.301444243932576
+          year: 1
+          stationaryRevenue: 2.3021358869347655
+        countryId: 0
+    RevenueHistoryModelBrandData:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RevenueHistoryModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - countryCode: countryCode
+          unitId: 6
+          monthes:
+          - revenue: 5.637376656633329
+            month: 5
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 9.301444243932576
+            year: 1
+            stationaryRevenue: 2.3021358869347655
+          - revenue: 5.637376656633329
+            month: 5
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 9.301444243932576
+            year: 1
+            stationaryRevenue: 2.3021358869347655
+          countryId: 0
+        - countryCode: countryCode
+          unitId: 6
+          monthes:
+          - revenue: 5.637376656633329
+            month: 5
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 9.301444243932576
+            year: 1
+            stationaryRevenue: 2.3021358869347655
+          - revenue: 5.637376656633329
+            month: 5
+            deliveryRevenue: 7.061401241503109
+            pickupRevenue: 9.301444243932576
+            year: 1
+            stationaryRevenue: 2.3021358869347655
+          countryId: 0
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    RevenueModel:
+      type: object
+      properties:
+        year:
+          type: integer
+          format: int32
+        month:
+          type: integer
+          format: int32
+        revenue:
+          type: number
+          format: double
+        stationaryRevenue:
+          type: number
+          format: double
+        deliveryRevenue:
+          type: number
+          format: double
+        pickupRevenue:
+          type: number
+          format: double
+      additionalProperties: false
+      example:
+        revenue: 5.637376656633329
+        month: 5
+        deliveryRevenue: 7.061401241503109
+        pickupRevenue: 9.301444243932576
+        year: 1
+        stationaryRevenue: 2.3021358869347655
+    ScheduleModel:
+      type: object
+      properties:
+        workTime:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/WorkTimeModel'
+      additionalProperties: false
+      example:
+        workTime:
+        - start: 9
+          end: 3
+        - start: 9
+          end: 3
+    StatisticsModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        unitId:
+          type: integer
+          format: int32
+        date:
+          type: string
+          nullable: true
+        stationaryRevenue:
+          type: number
+          format: double
+        stationaryOrderCount:
+          type: integer
+          format: int32
+        deliveryRevenue:
+          type: number
+          format: double
+        deliveryOrderCount:
+          type: integer
+          format: int32
+        revenue:
+          type: number
+          format: double
+        orderCount:
+          type: integer
+          format: int32
+        avgCheck:
+          type: number
+          format: double
+      additionalProperties: false
+      example:
+        date: date
+        deliveryOrderCount: 2
+        revenue: 7.061401241503109
+        avgCheck: 3.616076749251911
+        deliveryRevenue: 5.637376656633329
+        countryCode: countryCode
+        orderCount: 9
+        unitId: 6
+        stationaryOrderCount: 5
+        stationaryRevenue: 1.4658129805029452
+        countryId: 0
+    StatisticsModelBrandData:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/StatisticsModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - date: date
+          deliveryOrderCount: 2
+          revenue: 7.061401241503109
+          avgCheck: 3.616076749251911
+          deliveryRevenue: 5.637376656633329
+          countryCode: countryCode
+          orderCount: 9
+          unitId: 6
+          stationaryOrderCount: 5
+          stationaryRevenue: 1.4658129805029452
+          countryId: 0
+        - date: date
+          deliveryOrderCount: 2
+          revenue: 7.061401241503109
+          avgCheck: 3.616076749251911
+          deliveryRevenue: 5.637376656633329
+          countryCode: countryCode
+          orderCount: 9
+          unitId: 6
+          stationaryOrderCount: 5
+          stationaryRevenue: 1.4658129805029452
+          countryId: 0
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    StreetModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        typeName:
+          type: string
+          nullable: true
+        typeAbbr:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        name: name
+        typeName: typeName
+        id: 7
+        type: type
+        typeAbbr: typeAbbr
+    TotalRevenueHistoryModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        monthes:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/TotalRevenueModel'
+      additionalProperties: false
+      example:
+        countryCode: countryCode
+        monthes:
+        - revenue: 5.962133916683182
+          month: 1
+          year: 6
+          currency: currency
+        - revenue: 5.962133916683182
+          month: 1
+          year: 6
+          currency: currency
+        countryId: 0
+    TotalRevenueHistoryModelBrandData:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/TotalRevenueHistoryModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - countryCode: countryCode
+          monthes:
+          - revenue: 5.962133916683182
+            month: 1
+            year: 6
+            currency: currency
+          - revenue: 5.962133916683182
+            month: 1
+            year: 6
+            currency: currency
+          countryId: 0
+        - countryCode: countryCode
+          monthes:
+          - revenue: 5.962133916683182
+            month: 1
+            year: 6
+            currency: currency
+          - revenue: 5.962133916683182
+            month: 1
+            year: 6
+            currency: currency
+          countryId: 0
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    TotalRevenueHistoryModelBrandListData:
+      type: object
+      properties:
+        brands:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/TotalRevenueHistoryModelBrandData'
+      additionalProperties: false
+      example:
+        brands:
+        - countries:
+          - countryCode: countryCode
+            monthes:
+            - revenue: 5.962133916683182
+              month: 1
+              year: 6
+              currency: currency
+            - revenue: 5.962133916683182
+              month: 1
+              year: 6
+              currency: currency
+            countryId: 0
+          - countryCode: countryCode
+            monthes:
+            - revenue: 5.962133916683182
+              month: 1
+              year: 6
+              currency: currency
+            - revenue: 5.962133916683182
+              month: 1
+              year: 6
+              currency: currency
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+        - countries:
+          - countryCode: countryCode
+            monthes:
+            - revenue: 5.962133916683182
+              month: 1
+              year: 6
+              currency: currency
+            - revenue: 5.962133916683182
+              month: 1
+              year: 6
+              currency: currency
+            countryId: 0
+          - countryCode: countryCode
+            monthes:
+            - revenue: 5.962133916683182
+              month: 1
+              year: 6
+              currency: currency
+            - revenue: 5.962133916683182
+              month: 1
+              year: 6
+              currency: currency
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+    TotalRevenueModel:
+      type: object
+      properties:
+        year:
+          type: integer
+          format: int32
+        month:
+          type: integer
+          format: int32
+        currency:
+          type: string
+          nullable: true
+        revenue:
+          type: number
+          format: double
+      additionalProperties: false
+      example:
+        revenue: 5.962133916683182
+        month: 1
+        year: 6
+        currency: currency
+    TotalUnitCountListModel:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/UnitCountModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        total:
+          type: integer
+          format: int32
+      additionalProperties: false
+      example:
+        total: 1
+        countries:
+        - countryCode: countryCode
+          pizzeriaCount: 6
+          countryName: countryName
+          countryId: 0
+        - countryCode: countryCode
+          pizzeriaCount: 6
+          countryName: countryName
+          countryId: 0
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    UnitCountModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        countryName:
+          type: string
+          nullable: true
+        pizzeriaCount:
+          type: integer
+          format: int32
+      additionalProperties: false
+      example:
+        countryCode: countryCode
+        pizzeriaCount: 6
+        countryName: countryName
+        countryId: 0
+    UnitListModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        countryName:
+          type: string
+          nullable: true
+        pizzerias:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/UnitModel'
+      additionalProperties: false
+      example:
+        countryCode: countryCode
+        countryName: countryName
+        pizzerias:
+        - delivery: null
+          address:
+            street:
+              name: name
+              typeName: typeName
+              id: 7
+              type: type
+              typeAbbr: typeAbbr
+            locality:
+              name: name
+              id: 2
+            text: text
+            house:
+              number: number
+          stationary:
+            workTime:
+            - start: 9
+              end: 3
+            - start: 9
+              end: 3
+          webcamUrl: webcamUrl
+          name: name
+          alias: alias
+          timeZoneShift: 1
+          id: 6
+          uuid: uuid
+          startDate: startDate
+          coords:
+            lat: 5.962133916683182
+            long: 5.637376656633329
+        - delivery: null
+          address:
+            street:
+              name: name
+              typeName: typeName
+              id: 7
+              type: type
+              typeAbbr: typeAbbr
+            locality:
+              name: name
+              id: 2
+            text: text
+            house:
+              number: number
+          stationary:
+            workTime:
+            - start: 9
+              end: 3
+            - start: 9
+              end: 3
+          webcamUrl: webcamUrl
+          name: name
+          alias: alias
+          timeZoneShift: 1
+          id: 6
+          uuid: uuid
+          startDate: startDate
+          coords:
+            lat: 5.962133916683182
+            long: 5.637376656633329
+        countryId: 0
+    UnitListModelBrandData:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/UnitListModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - countryCode: countryCode
+          countryName: countryName
+          pizzerias:
+          - delivery: null
+            address:
+              street:
+                name: name
+                typeName: typeName
+                id: 7
+                type: type
+                typeAbbr: typeAbbr
+              locality:
+                name: name
+                id: 2
+              text: text
+              house:
+                number: number
+            stationary:
+              workTime:
+              - start: 9
+                end: 3
+              - start: 9
+                end: 3
+            webcamUrl: webcamUrl
+            name: name
+            alias: alias
+            timeZoneShift: 1
+            id: 6
+            uuid: uuid
+            startDate: startDate
+            coords:
+              lat: 5.962133916683182
+              long: 5.637376656633329
+          - delivery: null
+            address:
+              street:
+                name: name
+                typeName: typeName
+                id: 7
+                type: type
+                typeAbbr: typeAbbr
+              locality:
+                name: name
+                id: 2
+              text: text
+              house:
+                number: number
+            stationary:
+              workTime:
+              - start: 9
+                end: 3
+              - start: 9
+                end: 3
+            webcamUrl: webcamUrl
+            name: name
+            alias: alias
+            timeZoneShift: 1
+            id: 6
+            uuid: uuid
+            startDate: startDate
+            coords:
+              lat: 5.962133916683182
+              long: 5.637376656633329
+          countryId: 0
+        - countryCode: countryCode
+          countryName: countryName
+          pizzerias:
+          - delivery: null
+            address:
+              street:
+                name: name
+                typeName: typeName
+                id: 7
+                type: type
+                typeAbbr: typeAbbr
+              locality:
+                name: name
+                id: 2
+              text: text
+              house:
+                number: number
+            stationary:
+              workTime:
+              - start: 9
+                end: 3
+              - start: 9
+                end: 3
+            webcamUrl: webcamUrl
+            name: name
+            alias: alias
+            timeZoneShift: 1
+            id: 6
+            uuid: uuid
+            startDate: startDate
+            coords:
+              lat: 5.962133916683182
+              long: 5.637376656633329
+          - delivery: null
+            address:
+              street:
+                name: name
+                typeName: typeName
+                id: 7
+                type: type
+                typeAbbr: typeAbbr
+              locality:
+                name: name
+                id: 2
+              text: text
+              house:
+                number: number
+            stationary:
+              workTime:
+              - start: 9
+                end: 3
+              - start: 9
+                end: 3
+            webcamUrl: webcamUrl
+            name: name
+            alias: alias
+            timeZoneShift: 1
+            id: 6
+            uuid: uuid
+            startDate: startDate
+            coords:
+              lat: 5.962133916683182
+              long: 5.637376656633329
+          countryId: 0
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    UnitListModelBrandListData:
+      type: object
+      properties:
+        brands:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/UnitListModelBrandData'
+      additionalProperties: false
+      example:
+        brands:
+        - countries:
+          - countryCode: countryCode
+            countryName: countryName
+            pizzerias:
+            - delivery: null
+              address:
+                street:
+                  name: name
+                  typeName: typeName
+                  id: 7
+                  type: type
+                  typeAbbr: typeAbbr
+                locality:
+                  name: name
+                  id: 2
+                text: text
+                house:
+                  number: number
+              stationary:
+                workTime:
+                - start: 9
+                  end: 3
+                - start: 9
+                  end: 3
+              webcamUrl: webcamUrl
+              name: name
+              alias: alias
+              timeZoneShift: 1
+              id: 6
+              uuid: uuid
+              startDate: startDate
+              coords:
+                lat: 5.962133916683182
+                long: 5.637376656633329
+            - delivery: null
+              address:
+                street:
+                  name: name
+                  typeName: typeName
+                  id: 7
+                  type: type
+                  typeAbbr: typeAbbr
+                locality:
+                  name: name
+                  id: 2
+                text: text
+                house:
+                  number: number
+              stationary:
+                workTime:
+                - start: 9
+                  end: 3
+                - start: 9
+                  end: 3
+              webcamUrl: webcamUrl
+              name: name
+              alias: alias
+              timeZoneShift: 1
+              id: 6
+              uuid: uuid
+              startDate: startDate
+              coords:
+                lat: 5.962133916683182
+                long: 5.637376656633329
+            countryId: 0
+          - countryCode: countryCode
+            countryName: countryName
+            pizzerias:
+            - delivery: null
+              address:
+                street:
+                  name: name
+                  typeName: typeName
+                  id: 7
+                  type: type
+                  typeAbbr: typeAbbr
+                locality:
+                  name: name
+                  id: 2
+                text: text
+                house:
+                  number: number
+              stationary:
+                workTime:
+                - start: 9
+                  end: 3
+                - start: 9
+                  end: 3
+              webcamUrl: webcamUrl
+              name: name
+              alias: alias
+              timeZoneShift: 1
+              id: 6
+              uuid: uuid
+              startDate: startDate
+              coords:
+                lat: 5.962133916683182
+                long: 5.637376656633329
+            - delivery: null
+              address:
+                street:
+                  name: name
+                  typeName: typeName
+                  id: 7
+                  type: type
+                  typeAbbr: typeAbbr
+                locality:
+                  name: name
+                  id: 2
+                text: text
+                house:
+                  number: number
+              stationary:
+                workTime:
+                - start: 9
+                  end: 3
+                - start: 9
+                  end: 3
+              webcamUrl: webcamUrl
+              name: name
+              alias: alias
+              timeZoneShift: 1
+              id: 6
+              uuid: uuid
+              startDate: startDate
+              coords:
+                lat: 5.962133916683182
+                long: 5.637376656633329
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+        - countries:
+          - countryCode: countryCode
+            countryName: countryName
+            pizzerias:
+            - delivery: null
+              address:
+                street:
+                  name: name
+                  typeName: typeName
+                  id: 7
+                  type: type
+                  typeAbbr: typeAbbr
+                locality:
+                  name: name
+                  id: 2
+                text: text
+                house:
+                  number: number
+              stationary:
+                workTime:
+                - start: 9
+                  end: 3
+                - start: 9
+                  end: 3
+              webcamUrl: webcamUrl
+              name: name
+              alias: alias
+              timeZoneShift: 1
+              id: 6
+              uuid: uuid
+              startDate: startDate
+              coords:
+                lat: 5.962133916683182
+                long: 5.637376656633329
+            - delivery: null
+              address:
+                street:
+                  name: name
+                  typeName: typeName
+                  id: 7
+                  type: type
+                  typeAbbr: typeAbbr
+                locality:
+                  name: name
+                  id: 2
+                text: text
+                house:
+                  number: number
+              stationary:
+                workTime:
+                - start: 9
+                  end: 3
+                - start: 9
+                  end: 3
+              webcamUrl: webcamUrl
+              name: name
+              alias: alias
+              timeZoneShift: 1
+              id: 6
+              uuid: uuid
+              startDate: startDate
+              coords:
+                lat: 5.962133916683182
+                long: 5.637376656633329
+            countryId: 0
+          - countryCode: countryCode
+            countryName: countryName
+            pizzerias:
+            - delivery: null
+              address:
+                street:
+                  name: name
+                  typeName: typeName
+                  id: 7
+                  type: type
+                  typeAbbr: typeAbbr
+                locality:
+                  name: name
+                  id: 2
+                text: text
+                house:
+                  number: number
+              stationary:
+                workTime:
+                - start: 9
+                  end: 3
+                - start: 9
+                  end: 3
+              webcamUrl: webcamUrl
+              name: name
+              alias: alias
+              timeZoneShift: 1
+              id: 6
+              uuid: uuid
+              startDate: startDate
+              coords:
+                lat: 5.962133916683182
+                long: 5.637376656633329
+            - delivery: null
+              address:
+                street:
+                  name: name
+                  typeName: typeName
+                  id: 7
+                  type: type
+                  typeAbbr: typeAbbr
+                locality:
+                  name: name
+                  id: 2
+                text: text
+                house:
+                  number: number
+              stationary:
+                workTime:
+                - start: 9
+                  end: 3
+                - start: 9
+                  end: 3
+              webcamUrl: webcamUrl
+              name: name
+              alias: alias
+              timeZoneShift: 1
+              id: 6
+              uuid: uuid
+              startDate: startDate
+              coords:
+                lat: 5.962133916683182
+                long: 5.637376656633329
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+    UnitModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          nullable: true
+        uuid:
+          type: string
+          nullable: true
+        alias:
+          type: string
+          nullable: true
+        startDate:
+          type: string
+          nullable: true
+        timeZoneShift:
+          type: integer
+          format: int32
+        webcamUrl:
+          type: string
+          nullable: true
+        coords:
+          $ref: '#/components/schemas/CoordinatesModel'
+        address:
+          $ref: '#/components/schemas/AddressModel'
+        stationary:
+          $ref: '#/components/schemas/ScheduleModel'
+        delivery:
+          $ref: '#/components/schemas/ScheduleModel'
+      additionalProperties: false
+      example:
+        delivery: null
+        address:
+          street:
+            name: name
+            typeName: typeName
+            id: 7
+            type: type
+            typeAbbr: typeAbbr
+          locality:
+            name: name
+            id: 2
+          text: text
+          house:
+            number: number
+        stationary:
+          workTime:
+          - start: 9
+            end: 3
+          - start: 9
+            end: 3
+        webcamUrl: webcamUrl
+        name: name
+        alias: alias
+        timeZoneShift: 1
+        id: 6
+        uuid: uuid
+        startDate: startDate
+        coords:
+          lat: 5.962133916683182
+          long: 5.637376656633329
+    UnitSingleModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        countryName:
+          type: string
+          nullable: true
+        pizzeria:
+          $ref: '#/components/schemas/UnitModel'
+      additionalProperties: false
+      example:
+        countryCode: countryCode
+        pizzeria:
+          delivery: null
+          address:
+            street:
+              name: name
+              typeName: typeName
+              id: 7
+              type: type
+              typeAbbr: typeAbbr
+            locality:
+              name: name
+              id: 2
+            text: text
+            house:
+              number: number
+          stationary:
+            workTime:
+            - start: 9
+              end: 3
+            - start: 9
+              end: 3
+          webcamUrl: webcamUrl
+          name: name
+          alias: alias
+          timeZoneShift: 1
+          id: 6
+          uuid: uuid
+          startDate: startDate
+          coords:
+            lat: 5.962133916683182
+            long: 5.637376656633329
+        countryName: countryName
+        countryId: 0
+    UnitSingleModelBrandData:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/UnitSingleModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - countryCode: countryCode
+          pizzeria:
+            delivery: null
+            address:
+              street:
+                name: name
+                typeName: typeName
+                id: 7
+                type: type
+                typeAbbr: typeAbbr
+              locality:
+                name: name
+                id: 2
+              text: text
+              house:
+                number: number
+            stationary:
+              workTime:
+              - start: 9
+                end: 3
+              - start: 9
+                end: 3
+            webcamUrl: webcamUrl
+            name: name
+            alias: alias
+            timeZoneShift: 1
+            id: 6
+            uuid: uuid
+            startDate: startDate
+            coords:
+              lat: 5.962133916683182
+              long: 5.637376656633329
+          countryName: countryName
+          countryId: 0
+        - countryCode: countryCode
+          pizzeria:
+            delivery: null
+            address:
+              street:
+                name: name
+                typeName: typeName
+                id: 7
+                type: type
+                typeAbbr: typeAbbr
+              locality:
+                name: name
+                id: 2
+              text: text
+              house:
+                number: number
+            stationary:
+              workTime:
+              - start: 9
+                end: 3
+              - start: 9
+                end: 3
+            webcamUrl: webcamUrl
+            name: name
+            alias: alias
+            timeZoneShift: 1
+            id: 6
+            uuid: uuid
+            startDate: startDate
+            coords:
+              lat: 5.962133916683182
+              long: 5.637376656633329
+          countryName: countryName
+          countryId: 0
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    WeekRevenueHistoryModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        unitId:
+          type: integer
+          format: int32
+        weeks:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/WeekRevenueModel'
+      additionalProperties: false
+      example:
+        weeks:
+        - weekId: 4
+          revenue: 1.4658129805029452
+          stationaryCount: 9
+          deliveryRevenue: 5.637376656633329
+          pickupRevenue: 3.616076749251911
+          startDay: 2000-01-23T04:56:07.000+00:00
+          endDay: 2000-01-23T04:56:07.000+00:00
+          count: 5
+          deliveryCount: 2
+          stationaryRevenue: 7.061401241503109
+          pickupCount: 2
+        - weekId: 4
+          revenue: 1.4658129805029452
+          stationaryCount: 9
+          deliveryRevenue: 5.637376656633329
+          pickupRevenue: 3.616076749251911
+          startDay: 2000-01-23T04:56:07.000+00:00
+          endDay: 2000-01-23T04:56:07.000+00:00
+          count: 5
+          deliveryCount: 2
+          stationaryRevenue: 7.061401241503109
+          pickupCount: 2
+        countryCode: countryCode
+        unitId: 6
+        countryId: 0
+    WeekRevenueHistoryModelBrandData:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/WeekRevenueHistoryModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - weeks:
+          - weekId: 4
+            revenue: 1.4658129805029452
+            stationaryCount: 9
+            deliveryRevenue: 5.637376656633329
+            pickupRevenue: 3.616076749251911
+            startDay: 2000-01-23T04:56:07.000+00:00
+            endDay: 2000-01-23T04:56:07.000+00:00
+            count: 5
+            deliveryCount: 2
+            stationaryRevenue: 7.061401241503109
+            pickupCount: 2
+          - weekId: 4
+            revenue: 1.4658129805029452
+            stationaryCount: 9
+            deliveryRevenue: 5.637376656633329
+            pickupRevenue: 3.616076749251911
+            startDay: 2000-01-23T04:56:07.000+00:00
+            endDay: 2000-01-23T04:56:07.000+00:00
+            count: 5
+            deliveryCount: 2
+            stationaryRevenue: 7.061401241503109
+            pickupCount: 2
+          countryCode: countryCode
+          unitId: 6
+          countryId: 0
+        - weeks:
+          - weekId: 4
+            revenue: 1.4658129805029452
+            stationaryCount: 9
+            deliveryRevenue: 5.637376656633329
+            pickupRevenue: 3.616076749251911
+            startDay: 2000-01-23T04:56:07.000+00:00
+            endDay: 2000-01-23T04:56:07.000+00:00
+            count: 5
+            deliveryCount: 2
+            stationaryRevenue: 7.061401241503109
+            pickupCount: 2
+          - weekId: 4
+            revenue: 1.4658129805029452
+            stationaryCount: 9
+            deliveryRevenue: 5.637376656633329
+            pickupRevenue: 3.616076749251911
+            startDay: 2000-01-23T04:56:07.000+00:00
+            endDay: 2000-01-23T04:56:07.000+00:00
+            count: 5
+            deliveryCount: 2
+            stationaryRevenue: 7.061401241503109
+            pickupCount: 2
+          countryCode: countryCode
+          unitId: 6
+          countryId: 0
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    WeekRevenueModel:
+      type: object
+      properties:
+        startDay:
+          type: string
+          format: date-time
+        endDay:
+          type: string
+          format: date-time
+        revenue:
+          type: number
+          format: double
+        count:
+          type: integer
+          format: int32
+        deliveryRevenue:
+          type: number
+          format: double
+        deliveryCount:
+          type: integer
+          format: int32
+        stationaryRevenue:
+          type: number
+          format: double
+        stationaryCount:
+          type: integer
+          format: int32
+        pickupRevenue:
+          type: number
+          format: double
+        pickupCount:
+          type: integer
+          format: int32
+        weekId:
+          type: integer
+          format: int32
+      additionalProperties: false
+      example:
+        weekId: 4
+        revenue: 1.4658129805029452
+        stationaryCount: 9
+        deliveryRevenue: 5.637376656633329
+        pickupRevenue: 3.616076749251911
+        startDay: 2000-01-23T04:56:07.000+00:00
+        endDay: 2000-01-23T04:56:07.000+00:00
+        count: 5
+        deliveryCount: 2
+        stationaryRevenue: 7.061401241503109
+        pickupCount: 2
+    WeeklyTopModel:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          format: int32
+        countryCode:
+          type: string
+          nullable: true
+        top:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/WeeklyTopUnitModel'
+      additionalProperties: false
+      example:
+        top:
+        - weeks:
+          - weekId: 4
+            revenue: 1.4658129805029452
+            stationaryCount: 9
+            deliveryRevenue: 5.637376656633329
+            pickupRevenue: 3.616076749251911
+            startDay: 2000-01-23T04:56:07.000+00:00
+            endDay: 2000-01-23T04:56:07.000+00:00
+            count: 5
+            deliveryCount: 2
+            stationaryRevenue: 7.061401241503109
+            pickupCount: 2
+          - weekId: 4
+            revenue: 1.4658129805029452
+            stationaryCount: 9
+            deliveryRevenue: 5.637376656633329
+            pickupRevenue: 3.616076749251911
+            startDay: 2000-01-23T04:56:07.000+00:00
+            endDay: 2000-01-23T04:56:07.000+00:00
+            count: 5
+            deliveryCount: 2
+            stationaryRevenue: 7.061401241503109
+            pickupCount: 2
+          unitId: 6
+        - weeks:
+          - weekId: 4
+            revenue: 1.4658129805029452
+            stationaryCount: 9
+            deliveryRevenue: 5.637376656633329
+            pickupRevenue: 3.616076749251911
+            startDay: 2000-01-23T04:56:07.000+00:00
+            endDay: 2000-01-23T04:56:07.000+00:00
+            count: 5
+            deliveryCount: 2
+            stationaryRevenue: 7.061401241503109
+            pickupCount: 2
+          - weekId: 4
+            revenue: 1.4658129805029452
+            stationaryCount: 9
+            deliveryRevenue: 5.637376656633329
+            pickupRevenue: 3.616076749251911
+            startDay: 2000-01-23T04:56:07.000+00:00
+            endDay: 2000-01-23T04:56:07.000+00:00
+            count: 5
+            deliveryCount: 2
+            stationaryRevenue: 7.061401241503109
+            pickupCount: 2
+          unitId: 6
+        countryCode: countryCode
+        countryId: 0
+    WeeklyTopModelBrandData:
+      type: object
+      properties:
+        countries:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/WeeklyTopModel'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ErrorModel'
+        brand:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        countries:
+        - top:
+          - weeks:
+            - weekId: 4
+              revenue: 1.4658129805029452
+              stationaryCount: 9
+              deliveryRevenue: 5.637376656633329
+              pickupRevenue: 3.616076749251911
+              startDay: 2000-01-23T04:56:07.000+00:00
+              endDay: 2000-01-23T04:56:07.000+00:00
+              count: 5
+              deliveryCount: 2
+              stationaryRevenue: 7.061401241503109
+              pickupCount: 2
+            - weekId: 4
+              revenue: 1.4658129805029452
+              stationaryCount: 9
+              deliveryRevenue: 5.637376656633329
+              pickupRevenue: 3.616076749251911
+              startDay: 2000-01-23T04:56:07.000+00:00
+              endDay: 2000-01-23T04:56:07.000+00:00
+              count: 5
+              deliveryCount: 2
+              stationaryRevenue: 7.061401241503109
+              pickupCount: 2
+            unitId: 6
+          - weeks:
+            - weekId: 4
+              revenue: 1.4658129805029452
+              stationaryCount: 9
+              deliveryRevenue: 5.637376656633329
+              pickupRevenue: 3.616076749251911
+              startDay: 2000-01-23T04:56:07.000+00:00
+              endDay: 2000-01-23T04:56:07.000+00:00
+              count: 5
+              deliveryCount: 2
+              stationaryRevenue: 7.061401241503109
+              pickupCount: 2
+            - weekId: 4
+              revenue: 1.4658129805029452
+              stationaryCount: 9
+              deliveryRevenue: 5.637376656633329
+              pickupRevenue: 3.616076749251911
+              startDay: 2000-01-23T04:56:07.000+00:00
+              endDay: 2000-01-23T04:56:07.000+00:00
+              count: 5
+              deliveryCount: 2
+              stationaryRevenue: 7.061401241503109
+              pickupCount: 2
+            unitId: 6
+          countryCode: countryCode
+          countryId: 0
+        - top:
+          - weeks:
+            - weekId: 4
+              revenue: 1.4658129805029452
+              stationaryCount: 9
+              deliveryRevenue: 5.637376656633329
+              pickupRevenue: 3.616076749251911
+              startDay: 2000-01-23T04:56:07.000+00:00
+              endDay: 2000-01-23T04:56:07.000+00:00
+              count: 5
+              deliveryCount: 2
+              stationaryRevenue: 7.061401241503109
+              pickupCount: 2
+            - weekId: 4
+              revenue: 1.4658129805029452
+              stationaryCount: 9
+              deliveryRevenue: 5.637376656633329
+              pickupRevenue: 3.616076749251911
+              startDay: 2000-01-23T04:56:07.000+00:00
+              endDay: 2000-01-23T04:56:07.000+00:00
+              count: 5
+              deliveryCount: 2
+              stationaryRevenue: 7.061401241503109
+              pickupCount: 2
+            unitId: 6
+          - weeks:
+            - weekId: 4
+              revenue: 1.4658129805029452
+              stationaryCount: 9
+              deliveryRevenue: 5.637376656633329
+              pickupRevenue: 3.616076749251911
+              startDay: 2000-01-23T04:56:07.000+00:00
+              endDay: 2000-01-23T04:56:07.000+00:00
+              count: 5
+              deliveryCount: 2
+              stationaryRevenue: 7.061401241503109
+              pickupCount: 2
+            - weekId: 4
+              revenue: 1.4658129805029452
+              stationaryCount: 9
+              deliveryRevenue: 5.637376656633329
+              pickupRevenue: 3.616076749251911
+              startDay: 2000-01-23T04:56:07.000+00:00
+              endDay: 2000-01-23T04:56:07.000+00:00
+              count: 5
+              deliveryCount: 2
+              stationaryRevenue: 7.061401241503109
+              pickupCount: 2
+            unitId: 6
+          countryCode: countryCode
+          countryId: 0
+        brand: brand
+        errors:
+        - countryCode: countryCode
+          countryId: 6
+        - countryCode: countryCode
+          countryId: 6
+    WeeklyTopModelBrandListData:
+      type: object
+      properties:
+        brands:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/WeeklyTopModelBrandData'
+      additionalProperties: false
+      example:
+        brands:
+        - countries:
+          - top:
+            - weeks:
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              unitId: 6
+            - weeks:
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              unitId: 6
+            countryCode: countryCode
+            countryId: 0
+          - top:
+            - weeks:
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              unitId: 6
+            - weeks:
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              unitId: 6
+            countryCode: countryCode
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+        - countries:
+          - top:
+            - weeks:
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              unitId: 6
+            - weeks:
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              unitId: 6
+            countryCode: countryCode
+            countryId: 0
+          - top:
+            - weeks:
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              unitId: 6
+            - weeks:
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              - weekId: 4
+                revenue: 1.4658129805029452
+                stationaryCount: 9
+                deliveryRevenue: 5.637376656633329
+                pickupRevenue: 3.616076749251911
+                startDay: 2000-01-23T04:56:07.000+00:00
+                endDay: 2000-01-23T04:56:07.000+00:00
+                count: 5
+                deliveryCount: 2
+                stationaryRevenue: 7.061401241503109
+                pickupCount: 2
+              unitId: 6
+            countryCode: countryCode
+            countryId: 0
+          brand: brand
+          errors:
+          - countryCode: countryCode
+            countryId: 6
+          - countryCode: countryCode
+            countryId: 6
+    WeeklyTopUnitModel:
+      type: object
+      properties:
+        unitId:
+          type: integer
+          format: int32
+        weeks:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/WeekRevenueModel'
+      additionalProperties: false
+      example:
+        weeks:
+        - weekId: 4
+          revenue: 1.4658129805029452
+          stationaryCount: 9
+          deliveryRevenue: 5.637376656633329
+          pickupRevenue: 3.616076749251911
+          startDay: 2000-01-23T04:56:07.000+00:00
+          endDay: 2000-01-23T04:56:07.000+00:00
+          count: 5
+          deliveryCount: 2
+          stationaryRevenue: 7.061401241503109
+          pickupCount: 2
+        - weekId: 4
+          revenue: 1.4658129805029452
+          stationaryCount: 9
+          deliveryRevenue: 5.637376656633329
+          pickupRevenue: 3.616076749251911
+          startDay: 2000-01-23T04:56:07.000+00:00
+          endDay: 2000-01-23T04:56:07.000+00:00
+          count: 5
+          deliveryCount: 2
+          stationaryRevenue: 7.061401241503109
+          pickupCount: 2
+        unitId: 6
+    WorkTimeModel:
+      type: object
+      properties:
+        start:
+          type: integer
+          format: int32
+        end:
+          type: integer
+          format: int32
+      additionalProperties: false
+      example:
+        start: 9
+        end: 3
